@@ -1,0 +1,64 @@
+<app-header></app-header>
+<div class="container">
+  <div class="row">
+    <div class="col-12 text-center mb-5">
+      <h1>Plates</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 mb-3">
+      <div class="table-responsive">
+      <table class="table caption-top">
+        <caption>List of users</caption>
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Status</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="plates.length === 0" class="text-center">
+            <td colspan="4">No plates available.</td>
+          </tr>
+          <tr *ngFor="let plate of plates">
+            <th scope="row">{{ plate.id }}</th>
+            <td>{{ plate.dish.name }}</td>
+            <td>{{ plate.dish.description }}</td>
+            
+            <td>
+              <select [(ngModel)]="updateStatus" class="form-select ms-3" aria-label="Default select example" (change)="onChangeStatus(plate.id)">
+                <option selected>{{ plate.status.name }}</option>
+                <option *ngFor="let option of options" [value]="option.id">{{ option.name }}</option>
+                
+              </select>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>   
+    <div class="col-12 d-flex justify-content-center">
+      <nav aria-label="Page navigation">
+        <ul class="pagination">
+          <li class="page-item" [class.disabled]="currentPage === 1">
+            <a class="page-link" (click)="onPageChange(currentPage - 1)" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index" [class.active]="currentPage === i + 1">
+            <a class="page-link" (click)="onPageChange(i + 1)">{{ i + 1 }}</a>
+          </li>
+          <li class="page-item" [class.disabled]="currentPage === totalPages">
+            <a class="page-link" (click)="onPageChange(currentPage + 1)" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div> 
+  </div>
+
+</div>
