@@ -12,11 +12,8 @@ export class CookService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getOrders(page: number, limit: number, status?:any): Observable<any> {
-    if(status){
-      return this.httpClient.get<any>(`${this.base}/?page=${page}&limit=${limit}&status=${status}`);
-    }
-    return this.httpClient.get<any>(`${this.base}/?page=${page}&limit=${limit}`);
+  getOrders(page: number, limit: number, status?:any, search?:string): Observable<any> {
+    return this.httpClient.get<any>(`${this.base}/?page=${page}&limit=${limit}${status ? `&status=${status}` : ''}${search ? `&search=${search}` : ''}`);
   }
 
   postOrders() {

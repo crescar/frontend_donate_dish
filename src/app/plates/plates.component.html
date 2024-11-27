@@ -17,7 +17,7 @@
             <th scope="col">Name</th>
             <th scope="col">Description</th>
             <th scope="col">Status</th>
-            
+
           </tr>
         </thead>
         <tbody>
@@ -28,18 +28,15 @@
             <th scope="row">{{ plate.id }}</th>
             <td>{{ plate.dish.name }}</td>
             <td>{{ plate.dish.description }}</td>
-            
             <td>
-              <select [(ngModel)]="updateStatus" class="form-select ms-3" aria-label="Default select example" (change)="onChangeStatus(plate.id)">
-                <option selected>{{ plate.status.name }}</option>
+              <select [(ngModel)]="plate.statusId" class="form-select ms-3" aria-label="Default select example" (change)="onChangeStatus($event, plate.id)">
                 <option *ngFor="let option of options" [value]="option.id">{{ option.name }}</option>
-                
               </select>
             </td>
           </tr>
         </tbody>
       </table>
-    </div>   
+    </div>
     <div class="col-12 d-flex justify-content-center">
       <nav aria-label="Page navigation">
         <ul class="pagination">
@@ -58,7 +55,7 @@
           </li>
         </ul>
       </nav>
-    </div> 
+    </div>
   </div>
 
 </div>

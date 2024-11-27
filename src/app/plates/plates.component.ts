@@ -40,11 +40,14 @@ export class PlatesComponent implements OnInit {
   }
 
   onPageChange(page: number) {
+    if (page < 1 || page > this.totalPages) {
+      return;
+    }
     this.loadOrders(page);
   }
 
-  onChangeStatus(orderId: number) { 
-    this.cookServices.updateOrderStatus(orderId, this.updateStatus).subscribe((response: any) => {
+  onChangeStatus(event:any, orderId: number) {
+    this.cookServices.updateOrderStatus(orderId, event.target.value).subscribe((response: any) => {
       this.loadOrders(this.currentPage);
     });
   }
