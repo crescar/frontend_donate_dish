@@ -1,0 +1,12 @@
+version: '3.1'
+
+services: 
+  frontend:
+    ports:
+      - "4200:80"
+      - "80:80"
+      - "443:80"
+    build: 
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: frontend
