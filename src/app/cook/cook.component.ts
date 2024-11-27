@@ -18,7 +18,7 @@ export class CookComponent implements OnInit {
   totalPages: number = 1;
   totalItems: number = 0;
   itemsPerPage: number = 10;
-
+  currentStatus: any = null;
   options:any = [];
 
   constructor(private cookServices: CookService) {}
@@ -28,8 +28,8 @@ export class CookComponent implements OnInit {
     this.loadOrders(this.currentPage);
   }
 
-  loadOrders(page: number) {
-    this.cookServices.getOrders(page, this.itemsPerPage).subscribe((response: any) => {
+  loadOrders(page: number, status?: any) {
+    this.cookServices.getOrders(page, this.itemsPerPage, status).subscribe((response: any) => {
       this.plates = response.data.items || [];
       this.currentPage = response.data.page;
       this.totalPages = response.data.totalPages;
@@ -38,6 +38,9 @@ export class CookComponent implements OnInit {
   }
 
   onPageChange(page: number) {
+    if (page < 1 || page > this.totalPages) {
+      return;
+    }
     this.loadOrders(page);
   }
 
@@ -51,6 +54,16 @@ export class CookComponent implements OnInit {
     this.cookServices.getOrderStatus().subscribe((response: any) => {
       this.options = response.data;
     });
+  }
+
+  onStatusChange(event: any){
+    if(event.target.value == 'All'){
+      this.loadOrders(this.currentPage);
+      this.currentStatus = null;
+      return;
+    }
+    this.currentStatus = event.target.value;
+    this.loadOrders(this.currentPage, event.target.value);
   }
 
 }
