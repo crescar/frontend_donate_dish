@@ -18,13 +18,15 @@
 
   <div class="row">
     <div class="col-12 d-flex mb-5">
+      <div class="input-group mb-3">
+        <input (change)="searchOrders($event)" type="text" class="form-control" placeholder="Search by order number press enter to search" aria-label="Search by order number" aria-describedby="basic-addon2">
+      </div>
       <div class="input-group mb-3 w-25">
       <select (change)="onStatusChange($event)" class="form-select ms-3" aria-label="Default select example">
         <option selected>All</option>
         <option *ngFor="let option of options" [value]="option.id">{{ option.name }}</option>
       </select>
     </div>
-
 
     </div>
     <div class="col-12 mb-3">
