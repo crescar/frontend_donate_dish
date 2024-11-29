@@ -1,3 +1,3 @@
 export const environment = {
-  apiBaseUrl: 'http://reto-alegre.ddns.net',
+  apiBaseUrl: 'http://localhost:3000',
 };

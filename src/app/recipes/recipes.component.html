@@ -1,0 +1,80 @@
+<app-header></app-header>
+<div class="container">
+  <div class="row">
+    <div class="col-12 text-center mb-5">
+      <h1>Recipes</h1>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-12 d-flex mb-5">
+      <div class="input-group mb-3">
+        <input (change)="searchOrders($event)" type="text" class="form-control" placeholder="Search by name press enter to search" aria-label="Search by order number" aria-describedby="basic-addon2">
+      </div>
+    </div>
+    <div class="col-12 mb-3">
+      <div class="table-responsive">
+      <table class="table caption-top">
+        <caption>List of Recipes</caption>
+      </table>
+      <div class="container">
+        <div *ngIf="dishes.length === 0" class="text-center">
+          <p>No Recipes available.</p>
+        </div>
+        <div *ngFor="let dish of dishes">
+          <div class="card mb-3" (click)="selectItem=dish.id" role="button">
+            <div class="row g-0">
+              <div class="col-md-12">
+                <div class="card-body">
+                  <h5 class="card-title">{{ dish.name }}</h5>
+                  <p class="card-text">{{ dish.description }}</p>
+                  <p class="card-text"><small class="text-muted">Show Ingredients</small></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="container" *ngIf="selectItem === dish.id" (click)="selectItem=null" role="button">
+            <div class="card mb-3">
+              <div class="row g-0">
+                <div class="col-md-12">
+                  <div class="card-body">
+                    <div class="d-flex">
+                      <h5 class="card-title">Ingredients</h5>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item" *ngFor="let ingredient of dish.ingredients">{{ ingredient.name }} - {{ ingredient.quantity }}</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <!-- paginate this table -->
+
+    </div>
+    <div class="col-12 d-flex justify-content-center">
+      <nav aria-label="Page navigation">
+        <ul class="pagination">
+          <li class="page-item" [class.disabled]="currentPage === 1">
+            <a class="page-link" (click)="onPageChange(currentPage - 1)" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index" [class.active]="currentPage === i + 1">
+            <a class="page-link" (click)="onPageChange(i + 1)">{{ i + 1 }}</a>
+          </li>
+          <li class="page-item" [class.disabled]="currentPage === totalPages">
+            <a class="page-link" (click)="onPageChange(currentPage + 1)" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>

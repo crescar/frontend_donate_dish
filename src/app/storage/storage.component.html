@@ -2,33 +2,35 @@
 <div class="container">
   <div class="row">
     <div class="col-12 text-center mb-5">
-      <h1>Kitchen</h1>
+      <h1>Storage</h1>
     </div>
   </div>
 
   <div class="row">
+    <div class="col-12 d-flex mb-5">
+      <div class="input-group mb-3">
+        <input (change)="searchOrders($event)" type="text" class="form-control" placeholder="Search by name press enter to search" aria-label="Search by order number" aria-describedby="basic-addon2">
+      </div>
+    </div>
     <div class="col-12 mb-3">
       <div class="table-responsive">
       <table class="table caption-top">
-        <caption>List of Orders Cooking</caption>
+        <caption>List of Storage</caption>
         <thead>
           <tr>
             <th scope="col">#</th>
             <th scope="col">Name</th>
-            <th scope="col">Description</th>
-            <th scope="col">Status</th>
-
+            <th scope="col">Quantity</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngIf="plates.length === 0" class="text-center">
-            <td colspan="4">No plates available.</td>
+          <tr *ngIf="storages.length === 0" class="text-center">
+            <td colspan="3">No Storage available.</td>
           </tr>
-          <tr *ngFor="let plate of plates">
-            <th scope="row">{{ plate.id }}</th>
-            <td>{{ plate.dish.name }}</td>
-            <td>{{ plate.dish.description }}</td>
-            <td>{{ plate.status.name }}</td>
+          <tr *ngFor="let storage of storages">
+            <th scope="row">{{ storage.id }}</th>
+            <td>{{ storage.name }}</td>
+            <td>{{ storage.quantity }}</td>
           </tr>
         </tbody>
       </table>

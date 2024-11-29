@@ -2,7 +2,7 @@
 <div class="container">
   <div class="row">
     <div class="col-12 text-center mb-5">
-      <h1>Kitchen</h1>
+      <h1>Shopping History</h1>
     </div>
   </div>
 
@@ -10,25 +10,24 @@
     <div class="col-12 mb-3">
       <div class="table-responsive">
       <table class="table caption-top">
-        <caption>List of Orders Cooking</caption>
+        <caption>List of Shopping History</caption>
         <thead>
           <tr>
             <th scope="col">#</th>
             <th scope="col">Name</th>
-            <th scope="col">Description</th>
-            <th scope="col">Status</th>
-
+            <th scope="col">Quantity</th>
+            <th scope="col">Date</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngIf="plates.length === 0" class="text-center">
-            <td colspan="4">No plates available.</td>
+          <tr *ngIf="logs.length === 0" class="text-center">
+            <td colspan="3">No Shopping History available.</td>
           </tr>
-          <tr *ngFor="let plate of plates">
-            <th scope="row">{{ plate.id }}</th>
-            <td>{{ plate.dish.name }}</td>
-            <td>{{ plate.dish.description }}</td>
-            <td>{{ plate.status.name }}</td>
+          <tr *ngFor="let log of logs">
+            <th scope="row">{{ logs.id }}</th>
+            <td>{{ log.name }}</td>
+            <td>{{ log.quantity }}</td>
+            <td>{{ log.createdAt }}</td>
           </tr>
         </tbody>
       </table>
